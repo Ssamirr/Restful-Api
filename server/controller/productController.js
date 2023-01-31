@@ -51,33 +51,15 @@ const productController = {
     },
     update: (req, res) => {
         let id = req.params.id;
-        // try {
-        //     const updatedPlot = await product.findByIdAndUpdate(
-        //         id,
-        //         req.body,
-        //         { new: true }
-        //     );
-        //     res.json({
-        //         updatedPlot
-        //     });
-        // } catch (e) {
-        //     return res.status(422).send({
-        //         error: { message: 'e', resend: true }
-        //     });
-        // }
-        // console.log("id", id)
-        let newProduct = new product({
-                _id:id,
-                name: req.body.name,
-                description: req.body?.description,
-                date: Date.now(),
+        let updatedProduct = new product({
+            _id: id,
+            name: req.body.name,
+            description: req.body.description,
+            date: Date.now(),
         })
-        // console.log("new",newProduct)
-        product.findByIdAndUpdate(id, newProduct,{runValidators:true}, (err, doc) => {
-            console.log(newProduct)
-            console.log(doc)
+        product.findByIdAndUpdate(id, updatedProduct, { new: true, runValidators: true }, (err, doc) => {
             if (!err) {
-                res.json(newProduct)
+                res.json(doc)
             } else {
                 res.status(500).json(err);
             }

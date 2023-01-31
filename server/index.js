@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
+mongoose.set("strictQuery", true);
 mongoose.connect("mongodb+srv://Samir:1QiJIJLUyr52lVdw@cluster0.klz9ll1.mongodb.net/myDb")
     .then(res => {
         console.log('Connect!');
